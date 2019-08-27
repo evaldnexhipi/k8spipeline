@@ -63,7 +63,7 @@ node {
             stage("Create cluster configurations"){
                 sh 'sudo chmod -R 777 /root/'
                 sh 'sudo chmod -R 777 /root/.ssh/'
-                sh 'kops create cluster k8s.evald.in --node-count 2 --zones us-east-2b --node-size t2.micro --master-size t2.micro --master-volume-size 8 --node-volume-size 8  --ssh-public-key /root/.ssh/id_rsa.pub --state s3://k8s.evald.in --dns-zone Z229NXDHW3FXAA --dns private --yes'
+                /*sh 'kops create cluster k8s.evald.in --node-count 2 --zones us-east-2b --node-size t2.micro --master-size t2.micro --master-volume-size 8 --node-volume-size 8  --ssh-public-key /root/.ssh/id_rsa.pub --state s3://k8s.evald.in --dns-zone Z229NXDHW3FXAA --dns private --yes'*/
                 sh 'sudo chmod -R 700 /root/.ssh/'
                 sh 'sudo chmod -R 700 /root/'
             }
