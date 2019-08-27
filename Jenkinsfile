@@ -50,9 +50,11 @@ node {
             credentialsId: '877d75d7-ee4e-4339-bd48-2615c7a5b349',  
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
-                stage("Create s3 bucket"){
+           /*     
+           stage("Create s3 bucket"){
                 sh 'aws configure set region us-east-2'
                 sh 'aws s3 mb s3://k8s.evald.in'
+            */
             }
             stage("Generate ssh-keygen"){
                 sh 'sudo chmod -R 700 /root/.ssh/id_rsa'
@@ -88,7 +90,7 @@ node {
                 sh 'kubectl autoscale deployment my-app --cpu-percent=80 --min=2 --max=5'
             }
             stage ("Updating the image..."){
-                sh 'kubectl set image deployment/my-app my-app=xhesi12/taleas_img:latest'
+                /*sh 'kubectl set image deployment/my-app my-app=xhesi12/taleas_img:latest'*/
             }
         }
     }
