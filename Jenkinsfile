@@ -50,12 +50,12 @@ node {
             credentialsId: '877d75d7-ee4e-4339-bd48-2615c7a5b349',  
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
-           /*     
+            
            stage("Create s3 bucket"){
                 sh 'aws configure set region us-east-2'
                 sh 'aws s3 mb s3://k8s.evald.in'
             }
-            */
+            
             stage("Generate ssh-keygen"){
                 sh 'sudo chmod -R 700 /root/.ssh/id_rsa'
                 sh 'sudo ssh-keygen -t rsa -N "" -f /root/.ssh/id_rsa -y'
@@ -63,7 +63,7 @@ node {
             stage("Create cluster configurations"){
                 sh 'sudo chmod -R 777 /root/'
                 sh 'sudo chmod -R 777 /root/.ssh/'
-                /*sh 'kops create cluster k8s.evald.in --node-count 2 --zones us-east-2b --node-size t2.micro --master-size t2.micro --master-volume-size 8 --node-volume-size 8  --ssh-public-key /root/.ssh/id_rsa.pub --state s3://k8s.evald.in --dns-zone Z229NXDHW3FXAA --dns private --yes'*/
+                sh 'kops create cluster k8s.evald.in --node-count 2 --zones us-east-2b --node-size t2.micro --master-size t2.micro --master-volume-size 8 --node-volume-size 8  --ssh-public-key /root/.ssh/id_rsa.pub --state s3://k8s.evald.in --dns-zone Z229NXDHW3FXAA --dns private --yes'
                 sh 'sudo chmod -R 700 /root/.ssh/'
                 sh 'sudo chmod -R 700 /root/'
             }
