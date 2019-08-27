@@ -54,8 +54,8 @@ node {
            stage("Create s3 bucket"){
                 sh 'aws configure set region us-east-2'
                 sh 'aws s3 mb s3://k8s.evald.in'
-            */
             }
+            */
             stage("Generate ssh-keygen"){
                 sh 'sudo chmod -R 700 /root/.ssh/id_rsa'
                 sh 'sudo ssh-keygen -t rsa -N "" -f /root/.ssh/id_rsa -y'
