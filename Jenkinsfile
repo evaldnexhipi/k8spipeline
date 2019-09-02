@@ -47,7 +47,7 @@ node {
         [[
             $class: 'AmazonWebServicesCredentialsBinding',
             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-            credentialsId: '877d75d7-ee4e-4339-bd48-2615c7a5b349',  
+            credentialsId: 'cfb29e08-bb19-420f-b13e-079804cbfe52',  
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
             
