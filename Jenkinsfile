@@ -91,7 +91,8 @@ node {
                 sh 'kubectl autoscale deployment my-app --cpu-percent=80 --min=2 --max=5'
             }
             stage ("Updating the image..."){
-                /*sh 'kubectl set image deployment/my-app my-app=xhesi12/taleas_img:latest'*/
+                sh 'kubectl set image deployment/my-app my-app=xhesi12/taleas_img:latest'
+                //sh 'kubectl rollout undo deployments/my-app'
             }
         }
     }
