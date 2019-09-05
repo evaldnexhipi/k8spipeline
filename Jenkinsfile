@@ -82,16 +82,16 @@ node {
                 }
             }
             stage ("Deployment & Replicas"){
-                sh 'kubectl run my-app --image=evaldnexhipi/dockerhubi:firsttry --port=8080' 
+                sh 'kubectl run my-app --image=evaldnexhipi/dockerhubi:firsttry --port=8080 --replicas=2' 
             }
             stage ("Exposing the Deployment"){
                 sh 'kubectl expose deployment my-app --type=LoadBalancer --port=8080'
             }
             stage ("Autoscaling"){
-                sh 'kubectl autoscale deployment my-app --cpu-percent=80 --min=2 --max=5'
+                sh 'kubectl autoscale deployment my-app --cpu-percent=0.01 --min=2 --max=5'
             }
             stage ("Updating the image..."){
-                sh 'kubectl set image deployment/my-app my-app=xhesi12/taleas_img:latest'
+                //sh 'kubectl set image deployment/my-app my-app=xhesi12/taleas_img:latest'
                 //sh 'kubectl rollout undo deployments/my-app'
             }
         }
