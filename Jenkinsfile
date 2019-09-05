@@ -88,7 +88,7 @@ node {
                 sh 'kubectl expose deployment my-app --type=LoadBalancer --port=8080'
             }
             stage ("Autoscaling"){
-                sh 'kubectl autoscale deployment my-app --cpu-percent=0.01 --min=2 --max=5'
+                sh 'kubectl autoscale deployment my-app --cpu-percent=1 --min=2 --max=5'
             }
             stage ("Updating the image..."){
                 //sh 'kubectl set image deployment/my-app my-app=xhesi12/taleas_img:latest'
