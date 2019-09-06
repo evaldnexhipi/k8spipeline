@@ -10,7 +10,7 @@ node {
             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
             credentialsId: 'evaldID',  
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]]) {
+        ]]) { /*
         stage("create EC2 instance"){
             sh 'aws configure set region us-east-2'
             ID = sh (script: 'aws ec2 run-instances --image-id ami-0f93b5fd8f220e428 --count 1 --instance-type t2.micro --key-name amazonkey --security-group-ids sg-ea228589 --subnet-id subnet-d54bfd99 --region us-east-2 --query \'Instances[0].InstanceId\'',returnStdout: true)
@@ -94,26 +94,30 @@ node {
                 //sh 'kubectl set image deployment/my-app my-app=xhesi12/taleas_img:latest'
                 //sh 'kubectl rollout undo deployments/my-app'
             }
-           stage ("Verifications"){
+            */
+          stage ("Verifications"){
                 sh 'kubectl cluster-info'
                 sh 'kubectl get nodes'
                 sh 'kubectl version --short'
             }
-           stage ("Deployment of files"){
-                //sh 'rm -r yamlDirectory'
-               sh 'git clone https://github.com/XhesikaLeka/yamlDirectory.git'
+
+            stage ("Deployment of files"){
+               sh 'rm -r yamlDirectory'
+               sh 'git clone https://github.com/evaldnexhipi/yamlDirectory.git'
                sh "sed -i \"s/<<NFS Server IP>>/\"${remote.host}\"/g\" yamlDirectory/deployment.yaml"
             }
             stage ("Deployment of the 3 files"){
                 sh 'kubectl create -f yamlDirectory/deployment.yaml' 
                 sh 'kubectl create -f yamlDirectory/class.yaml --validate=false'
                 sh 'kubectl create -f yamlDirectory/rbac.yaml'
-            }           
+            }
+            
             stage ("Helm Installation"){
                 sh 'curl -LO https://git.io/get_helm.sh'
                 sh 'chmod 700 get_helm.sh'
                 sh './get_helm.sh'
             }
+            
             stage ("Prometheus pre-Installation"){
                sh 'kubectl -n kube-system create serviceaccount tiller'
                 sh 'kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller'
@@ -125,13 +129,13 @@ node {
                   sh 'sleep 30'
             }
             stage ("Prometheus Deployment"){
-               // sh 'helm del --purge prometheus'
+                //sh 'helm del --purge prometheus'
                 sh 'helm repo update'
                 sh 'helm install stable/prometheus --namespace monitoring --name prometheus --set server.service.type=LoadBalancer --set server.service.servicePort=8082'
             }
             stage("Defining the grafana data sources"){
                 //sh 'helm del --purge grafana'
-                sh 'kubectl apply -f https://raw.githubusercontent.com/islajd/kubernetes-prometheus-grafana/master/monitoring/grafana/config.yml'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/evaldnexhipi/yamlFiles/master/monitoring/grafana/config.yml'
                 sh 'kubectl get configmaps -n monitoring'
             }
             stage("Override Grafana value"){
