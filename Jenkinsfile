@@ -82,7 +82,7 @@ node {
                 }
             }
             stage ("Deployment & Replicas"){
-                sh 'kubectl run my-app --image=evaldnexhipi/dockerhubi:firsttry --port=8080 --replicas=2' 
+                sh 'kubectl run my-app --image=evaldnexhipi/dockerhubi:firsttry --port=8080 --replicas=3' 
             }
             stage ("Exposing the Deployment"){
                 sh 'kubectl expose deployment my-app --type=LoadBalancer --port=8080'
