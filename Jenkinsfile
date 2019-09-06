@@ -10,7 +10,7 @@ node {
             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
             credentialsId: 'evaldID',  
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]]) { /*
+        ]]) { 
         stage("create EC2 instance"){
             sh 'aws configure set region us-east-2'
             ID = sh (script: 'aws ec2 run-instances --image-id ami-0f93b5fd8f220e428 --count 1 --instance-type t2.micro --key-name amazonkey --security-group-ids sg-ea228589 --subnet-id subnet-d54bfd99 --region us-east-2 --query \'Instances[0].InstanceId\'',returnStdout: true)
@@ -94,7 +94,7 @@ node {
                 //sh 'kubectl set image deployment/my-app my-app=xhesi12/taleas_img:latest'
                 //sh 'kubectl rollout undo deployments/my-app'
             }
-            */
+            
           stage ("Verifications"){
                 sh 'kubectl cluster-info'
                 sh 'kubectl get nodes'
